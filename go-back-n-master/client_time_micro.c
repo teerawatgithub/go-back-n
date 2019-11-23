@@ -36,6 +36,7 @@ long mtime, seconds, useconds;
 struct timeb start, end;
 int diff;
 
+
 void DieWithError (char *errorMessage);	/* Error handling function */
 void CatchAlarm (int ignored);	/* Handler for SIGALRM */
 int max (int a, int b);		/* macros that most compilers include - used for calculating a few things */
@@ -211,12 +212,12 @@ main (int argc, char *argv[])
 	    }
 	}
     }
-  
+
   ftime(&end);
   gettimeofday(&end2, NULL);
-  diff = (int) (1000000.0 * (end.time - start.time) + (end.millitm - start.millitm));
-
-  
+  diff = (int) (1000.0 * (end.time - start.time) + (end.millitm - start.millitm));
+  unsigned long time_in_microsStart = 1000000 * start2.tv_sec + start2.tv_usec;
+  unsigned long time_in_microsStop = 1000000 * end2.tv_sec + end2.tv_usec;
   int ctr;
   for (ctr = 0; ctr < 10; ctr++) /* send 10 teardown packets - don't have to necessarily send 10 but spec said "up to 10" */
     {
@@ -229,7 +230,7 @@ main (int argc, char *argv[])
     }
   close (sock); /* close socket */
   printf("\nTime = %d msec.", diff);
-  printf("\nTime2: %ld microsecons\n", end2.tv_usec - start2.tv_usec);
+  printf("\nTime2: %ld microsecons\n", time_in_microsStop - time_in_microsStart);
   exit (0);
 }
 
