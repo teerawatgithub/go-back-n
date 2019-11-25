@@ -1,0 +1,27 @@
+Idle RQ is normally implemented into the link layer as a protocol that control
+errors from unreliable communication channel, but we are going to
+implement this on the application layer with reliable communication channel
+backend. How do we make it unreliable to test the error control scheme of Idle
+RQ? The solution is to create a fake troublesome communication channel send()
+API that might send or not send on demand. It might also corrupt your packet
+information too! (I call packet as a frame in this work because the link layer
+call it so)
+
+# Details
+
+server serves as secondary AKA receiver
+client serves as primary AKA sender
+
+but you need to run the server first!
+
+first we need to define our frame structure
+our frame is a short big (2 bytes)
+the first 8 bits are for sending byte data and the last 8 bits are reserved
+for header data
+
+# Running
+`make` for compilation on Unix
+
+`./server` to start a server then
+`./client` to connect to the server, don't forget to change the IP variable
+inside client.c file if you don't want to use the default localhost stuff.
