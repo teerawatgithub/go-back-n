@@ -158,7 +158,7 @@ main (int argc, char *argv[])
 	{
 	  if(lossRate > drand48())
 		continue; /* drop packet - for testing/debug purposes */
-	  printf ("---- RECEIVE PACKET %d length %d\n", currPacket.seq_no, currPacket.length);
+	//   printf ("---- RECEIVE PACKET %d length %d\n", currPacket.seq_no, currPacket.length);
 
 	  datasize+=currPacket.length;
 
@@ -170,7 +170,7 @@ main (int argc, char *argv[])
 	      memcpy (&buffer[buff_offset], currPacket.data, /* copy packet data to buffer */
 		      currPacket.length);
 	    }
-	  printf ("---- SEND ACK %d\n", packet_rcvd);
+	//   printf ("---- SEND ACK %d\n", packet_rcvd);
 	  struct gbnpacket currAck; /* ack packet */
 	  currAck.type = htonl (2); /*convert to network byte order */
 	  currAck.seq_no = htonl (packet_rcvd);

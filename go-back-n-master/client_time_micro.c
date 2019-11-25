@@ -32,7 +32,7 @@ int windowSize = 0;
 int sendflag = 1;
 
 struct timeval start2, end2;
-long mtime, seconds, useconds;
+// long mtime, seconds, useconds;
 struct timeb start, end;
 int diff;
 
